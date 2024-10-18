@@ -25,43 +25,7 @@ function App() {
         isDone: false,
       });
       if (response.status === 200) {
-        console.log("성공");
         setTodoValue("");
-        getTodo();
-      } else {
-        console.log("실패");
-      }
-    } catch (e) {
-      console.log(e);
-    }
-  };
-
-  const updateTodo = async (id) => {
-    try {
-      const todo = todoList.find((item) => item._id === id);
-      const response = await api.put(`/todos/${id}`, {
-        isDone: !todo.isDone,
-      });
-      if (response.status === 200) {
-        console.log("todo 업데이트 성공");
-        setTodoList((prev) =>
-          prev.map((item) =>
-            item._id === id ? { ...item, isDone: !item.isDone } : item
-          )
-        );
-      }
-      await getTodo();
-    } catch (e) {
-      console.log(e);
-    }
-  };
-
-  const deleteTodo = async (id) => {
-    try {
-      const response = await api.delete(`/todos/${id}`);
-      if (response.status === 200) {
-        console.log("todo 삭제 성공");
-        console.log("id는", id);
         getTodo();
       }
     } catch (e) {
@@ -92,11 +56,7 @@ function App() {
         </Col>
       </Row>
 
-      <TodoBoard
-        todoList={todoList}
-        updateTodo={updateTodo}
-        deleteTodo={deleteTodo}
-      />
+      <TodoBoard todoList={todoList} getTodo={getTodo} />
     </Container>
   );
 }

@@ -1,18 +1,13 @@
 import React from "react";
 import TodoItem from "./TodoItem";
 
-const TodoBoard = ({ todoList, updateTodo, deleteTodo }) => {
+const TodoBoard = ({ todoList, getTodo }) => {
   return (
     <div>
       <h2>Todo List</h2>
       {todoList.length > 0 ? (
-        todoList.map((item, index) => (
-          <TodoItem
-            item={item}
-            key={index}
-            updateTodo={updateTodo}
-            deleteItem={deleteTodo}
-          />
+        todoList.map((item) => (
+          <TodoItem item={item} key={item._id} getTodo={getTodo} />
         ))
       ) : (
         <h2>There is no Item to show</h2>
