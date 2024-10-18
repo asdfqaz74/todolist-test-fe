@@ -1,32 +1,7 @@
 import React from "react";
 import { Col, Row } from "react-bootstrap";
-import api from "../utils/api";
 
-const TodoItem = ({ item, getTodo }) => {
-  const updateTodo = async (id) => {
-    try {
-      const response = await api.put(`/todos/${id}`, {
-        isDone: !item.isDone,
-      });
-      if (response.status === 200) {
-        getTodo();
-      }
-    } catch (e) {
-      console.log(e);
-    }
-  };
-
-  const deleteItem = async (id) => {
-    try {
-      const response = await api.delete(`/todos/${id}`);
-      if (response.status === 200) {
-        getTodo();
-      }
-    } catch (e) {
-      console.log(e);
-    }
-  };
-
+const TodoItem = ({ item, updateTodo, deleteTodo }) => {
   return (
     <Row>
       <Col xs={12}>
@@ -34,10 +9,16 @@ const TodoItem = ({ item, getTodo }) => {
           <div className="todo-content">{item.todo}</div>
 
           <div>
-            <button className="button-delete" onClick={deleteItem}>
+            <button
+              className="button-delete"
+              onClick={() => deleteTodo(item._id)}
+            >
               삭제
             </button>
-            <button className="button-delete" onClick={updateTodo}>
+            <button
+              className="button-delete"
+              onClick={() => updateTodo(item._id)}
+            >
               {item.isDone ? "안끝남" : "끝남"}
             </button>
           </div>

@@ -18,6 +18,10 @@ function App() {
     setTodoList(response.data.data);
   };
 
+  useEffect(() => {
+    getTodo();
+  }, []);
+
   const addTodo = async () => {
     try {
       const response = await api.post("/todos", {
@@ -33,9 +37,30 @@ function App() {
     }
   };
 
-  useEffect(() => {
-    getTodo();
-  }, []);
+  const updateItem = async (id) => {
+    try {
+      const todo = todoList.find((item) => item._id === id);
+      const response = await api.put(`/todos/${id}`, {
+        isDone: !todo.isDone,
+      });
+      if (response.status === 200) {
+        getTodo();
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  const deleteItem = async (id) => {
+    try {
+      const response = await api.delete(`/todos/${id}`);
+      if (response.status === 200) {
+        getTodo();
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   return (
     <Container>
@@ -56,7 +81,11 @@ function App() {
         </Col>
       </Row>
 
-      <TodoBoard todoList={todoList} getTodo={getTodo} />
+      <TodoBoard
+        todoList={todoList}
+        deleteTodo={deleteItem}
+        updateTodo={updateItem}
+      />
     </Container>
   );
 }
