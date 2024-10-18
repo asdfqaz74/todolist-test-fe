@@ -1,7 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Col, Row } from "react-bootstrap";
 
 const TodoItem = ({ item, updateTodo, deleteTodo }) => {
+  useEffect(() => {
+    console.log(
+      `Item ${item.todo} is has been updated: isDone = ${item.isDone}`
+    );
+  }, [item.isDone, item.todo]);
   return (
     <Row>
       <Col xs={12}>
