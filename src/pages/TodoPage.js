@@ -9,21 +9,21 @@ const TodoPage = () => {
   const [todoList, setTodoList] = useState([]);
   const [todoValue, setTodoValue] = useState("");
 
-  const getTasks = async () => {
-    const response = await api.get("/tasks");
+  const getTodos = async () => {
+    const response = await api.get("/todos");
     setTodoList(response.data.data);
   };
   useEffect(() => {
-    getTasks();
+    getTodos();
   }, []);
   const addTodo = async () => {
     try {
-      const response = await api.post("/tasks", {
+      const response = await api.post("/todos", {
         task: todoValue,
         isComplete: false,
       });
       if (response.status === 200) {
-        getTasks();
+        getTodos();
       }
       setTodoValue("");
     } catch (error) {
@@ -34,9 +34,9 @@ const TodoPage = () => {
   const deleteItem = async (id) => {
     try {
       console.log(id);
-      const response = await api.delete(`/tasks/${id}`);
+      const response = await api.delete(`/todos/${id}`);
       if (response.status === 200) {
-        getTasks();
+        getTodos();
       }
     } catch (error) {
       console.log("error", error);
@@ -46,11 +46,11 @@ const TodoPage = () => {
   const toggleComplete = async (id) => {
     try {
       const task = todoList.find((item) => item._id === id);
-      const response = await api.put(`/tasks/${id}`, {
+      const response = await api.put(`/todos/${id}`, {
         isComplete: !task.isComplete,
       });
       if (response.status === 200) {
-        getTasks();
+        getTodos();
       }
     } catch (error) {
       console.log("error", error);
