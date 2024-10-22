@@ -19,8 +19,8 @@ const TodoPage = () => {
   const addTodo = async () => {
     try {
       const response = await api.post("/todos", {
-        task: todoValue,
-        isComplete: false,
+        todo: todoValue,
+        isDone: false,
       });
       if (response.status === 200) {
         getTodos();
