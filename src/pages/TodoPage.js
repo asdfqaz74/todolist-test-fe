@@ -46,7 +46,7 @@ const TodoPage = () => {
     try {
       const todo = todoList.find((item) => item._id === id);
       const response = await api.put(`/todos/${id}`, {
-        isDone: !todo.isComplete,
+        isDone: !todo.isDone,
       });
       if (response.status === 200) {
         getTodos();
