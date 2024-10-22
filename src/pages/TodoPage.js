@@ -33,7 +33,6 @@ const TodoPage = () => {
 
   const deleteItem = async (id) => {
     try {
-      console.log(id);
       const response = await api.delete(`/todos/${id}`);
       if (response.status === 200) {
         getTodos();
@@ -45,9 +44,9 @@ const TodoPage = () => {
 
   const toggleComplete = async (id) => {
     try {
-      const task = todoList.find((item) => item._id === id);
+      const todo = todoList.find((item) => item._id === id);
       const response = await api.put(`/todos/${id}`, {
-        isComplete: !task.isComplete,
+        isDone: !todo.isComplete,
       });
       if (response.status === 200) {
         getTodos();
