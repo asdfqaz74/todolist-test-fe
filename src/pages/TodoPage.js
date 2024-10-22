@@ -77,8 +77,8 @@ const TodoPage = () => {
 
       <TodoBoard
         todoList={todoList}
-        deleteItem={deleteItem}
-        toggleComplete={toggleComplete}
+        deleteTodo={deleteItem}
+        updateTodo={toggleComplete}
       />
     </Container>
   );
