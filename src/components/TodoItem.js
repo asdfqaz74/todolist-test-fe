@@ -7,6 +7,7 @@ const TodoItem = ({ item, updateTodo, deleteTodo }) => {
       <Col xs={12}>
         <div className={`todo-item ${item.isDone ? "item-complete" : ""}`}>
           <div className="todo-content">{item.todo}</div>
+          <div>by {item.author.name}</div>
 
           <div>
             <button
