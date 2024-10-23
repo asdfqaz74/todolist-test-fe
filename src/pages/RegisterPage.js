@@ -17,6 +17,18 @@ const RegisterPage = () => {
 
     // 비밀번호 확인
     try {
+      if (!name) {
+        throw new Error("이름을 입력해주세요.");
+      }
+
+      if (!email) {
+        throw new Error("이메일을 입력해주세요.");
+      }
+
+      if (!password) {
+        throw new Error("비밀번호를 입력해주세요.");
+      }
+
       if (password !== rePassword) {
         throw new Error("비밀번호가 일치하지 않습니다.");
       }
