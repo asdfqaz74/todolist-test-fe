@@ -4,8 +4,9 @@ import api from "../utils/api";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
+import { Button } from "react-bootstrap";
 
-const TodoPage = () => {
+const TodoPage = ({ setUser }) => {
   const [todoList, setTodoList] = useState([]);
   const [todoValue, setTodoValue] = useState("");
 
@@ -56,8 +57,21 @@ const TodoPage = () => {
       console.log("error", error);
     }
   };
+
+  const handleLogout = () => {
+    sessionStorage.removeItem("token");
+    setUser(null);
+  };
+
   return (
     <Container>
+      <Row>
+        <Col className="text-end mt-2">
+          <Button variant="primary" size="sm" onClick={handleLogout}>
+            로그아웃
+          </Button>
+        </Col>
+      </Row>
       <Row className="add-item-row">
         <Col xs={12} sm={10}>
           <input
