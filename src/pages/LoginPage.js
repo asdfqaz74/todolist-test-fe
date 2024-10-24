@@ -13,6 +13,12 @@ const LoginPage = ({ user, setUser }) => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
+
+    if (!email || !password) {
+      setError("이메일과 비밀번호를 입력해주세요.");
+      return;
+    }
+
     try {
       const response = await api.post("/user/login", { email, password });
       if (response.status === 200) {
